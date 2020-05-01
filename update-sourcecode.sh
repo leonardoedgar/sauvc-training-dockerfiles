@@ -26,7 +26,7 @@ fi
 
 CATKIN_WS="${COMPOSE_DIR}/catkin_ws/src"
 mkdir -p ${CATKIN_WS}
-REPOSITORIES=("sauvc-training")
+REPOSITORIES=("sauvc_training")
 CURRENT_DIR=$(pwd)
 for REPO in "${REPOSITORIES[@]}"
 do

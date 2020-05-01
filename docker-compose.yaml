@@ -21,7 +21,7 @@ services:
     shm_size: 256M
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - ./catkin_ws/src/sauvc-training:/home/leonardoedgar/catkin_ws/src/sauvc-training
+      - ./catkin_ws/src/sauvc_training:/home/leonardoedgar/catkin_ws/src/sauvc_training
     stop_signal: SIGINT
-    working_dir: /home/leonardoedgar/catkin_ws/src/sauvc-training
+    working_dir: /home/leonardoedgar/catkin_ws/src/sauvc_training
     command: sleep infinity
