@@ -1,0 +1,32 @@
+FROM leonardoedgar/sauvctraining:latest
+MAINTAINER Leonardo Edgar
+
+# Install matplotlib
+RUN apt-get update && apt-get install -y python-matplotlib --no-install-recommends
+
+# User and permissions
+ARG user=leonardoedgar
+ARG group=leonardoedgar
+ARG uid=1000
+ARG gid=1000
+ARG home=/home/${user}
+RUN mkdir -p /etc/sudoers.d \
+    && groupadd -g ${gid} ${group} \
+    && useradd -d ${home} -u ${uid} -g ${gid} -m -s /bin/bash ${user} \
+    && echo "${user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/sudoers_${user}
+USER ${user}
+
+WORKDIR ${home}
+
+# Setup catkin workspace
+RUN mkdir -p catkin_ws/src/
+COPY --chown=${user} catkin_ws/src/sauvc-training			catkin_ws/src/sauvc-training
+RUN /bin/bash -c "source /ros_entrypoint.sh; cd catkin_ws/src; catkin_init_workspace; cd ..; catkin build"
+
+# Update .bashrc for bash interactive mode
+RUN echo "source /home/${user}/catkin_ws/devel/setup.bash\nPATH=$HOME/.local/bin:$PATH" >> /home/${user}/.bashrc
+
+# Update entrypoint for commands
+#RUN sudo sed --in-place --expression \
+#    '$isource "/home/${user}/catkin_ws/devel/setup.bash"' \
+#    /ros_entrypoint.sh
