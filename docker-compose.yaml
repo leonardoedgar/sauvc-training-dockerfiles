@@ -1,0 +1,27 @@
+version: '3.3'
+
+services:
+  base:
+    build: .
+    image: leonardoedgar/sauvctraining
+    container_name: base
+    network_mode: "host"
+    stop_signal: SIGINT
+  visualisation:
+    build: 
+      context: .
+      dockerfile: Dockerfile.visualisation
+    depends_on: 
+    - base
+    image: leonardoedgar/sauvcvisualisation
+    container_name: visualisation
+    network_mode: "host"
+    environment:
+      - DISPLAY=unix$DISPLAY
+    shm_size: 256M
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./catkin_ws/src/sauvc-training:/home/leonardoedgar/catkin_ws/src/sauvc-training
+    stop_signal: SIGINT
+    working_dir: /home/leonardoedgar/catkin_ws/src/sauvc-training
+    command: sleep infinity
