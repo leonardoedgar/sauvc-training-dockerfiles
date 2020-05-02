@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install python catkin tools
-RUN apt-get update && apt-get install -y python-catkin-tools --no-install-recommends
+RUN apt-get update && apt-get install -y python-catkin-tools --no-install-recommends 
 
-# Install Python Unit Tests Library
-RUN apt-get update && apt-get install -y python-pytest python-pytest-mock --no-install-recommends
+# Install Python libraries
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	python-ipdb python-pytest python-pytest-mock python-scipy

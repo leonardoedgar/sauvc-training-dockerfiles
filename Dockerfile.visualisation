@@ -2,7 +2,7 @@ FROM leonardoedgar/sauvctraining:latest
 MAINTAINER Leonardo Edgar
 
 # Install matplotlib
-RUN apt-get update && apt-get install -y python-matplotlib --no-install-recommends
+RUN apt-get update && apt-get install -y python-matplotlib python-tk --no-install-recommends
 
 # User and permissions
 ARG user=leonardoedgar
