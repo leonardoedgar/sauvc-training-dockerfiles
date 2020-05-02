@@ -20,7 +20,7 @@ WORKDIR ${home}
 
 # Setup catkin workspace
 RUN mkdir -p catkin_ws/src/
-COPY --chown=${user} catkin_ws/src/sauvc_training			catkin_ws/src/sauvc_training
+COPY --chown=${user} catkin_ws/src/sauvc-training/sauvc_control			catkin_ws/src/sauvc_control
 RUN /bin/bash -c "source /ros_entrypoint.sh; cd catkin_ws/src; catkin_init_workspace; cd ..; catkin build"
 
 # Update .bashrc for bash interactive mode
